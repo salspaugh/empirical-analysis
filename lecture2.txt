@@ -1,0 +1,61 @@
+- it's okay to combine frameworks / tools and be fluid
+- passive versus active measurements
+    - passive: observing existing activity, privacy concerns, maybe less planning, less control over what you get
+    - active: generating the activity yourself, unclear if it's representative
+- different from third-party versus first-hand measurements
+- vantage point: where in the system are you measuring?
+    - this can have a major effect on your analysis
+    - your perspective versus the thing you are measuring
+
+- data presentation issues:
+    - don't use more digits of significance than necessary
+    - e.g., in cases when you have more precision than possible accuracy
+
+- theme:
+    - what are invariants in the data -- what are abstractions that are just true
+    - you bring domain knowledge into the activity
+
+- pitfall: timestamps: what can go wrong?
+    - they're from the future
+        - easy to check
+    - uknown timezones or timezone issues (more of a metadata issue)
+    - clock drift: the clock may move over time due to bad synchronization
+        - can maybe fix if you have multiple clocks
+        - really broken
+        - might be able to check versus diurnal patterns (e.g., people become nocturnal)
+    - temporal order when comparing clocks: relative ordering may not be correct
+        -   when you have a watch, you know what time it is, when you have two, you never know
+    - resolution or precision vs accuracy -- higher precision may not be more accurate
+        - also trade-off between when something happened and when it was recorded
+        - look at the very smallest gap in timestamps -- if there are multiple, likely a resolution issue
+        - should check gaps based on the physics and make sure they aren't closer than they possibly could be (?)
+        - then look at the next smallest value -- is it 7 or 12? 
+            - if 12, then it's probably a resolution of 6 ms
+            - if 7, then it's probably 1 ms resolution but constrained based on physics (?)
+    - fail to advance (read it twice for two different events and it hasn't gone forward)
+        - often can happen when there is a timer event incrementing the clock
+    - timer wrap-around
+
+- data quality: correctness, quirks, errors in your data
+    - different from data utility: how useful is this data
+
+- pitfall: reporting average and standard deviation
+    - this is not useful and can be really misleading if the data isn't Gaussian!
+    - example: standard deviation bigger than mean when you know the data must be positive! can't happen if data is normal
+    - example: huge percent of the data is less than the mean: can't happen if data is normal
+    - example: 99.4% of the data is less than the mean plus one sigma: can't be true
+    - better to use ROBUST summaries: median, percentiles
+
+- pitfall: histograms require you picking bin size
+    - different bin sizes can give you different information
+    - histograms are not tools to summarize typically unless the data has modes
+    - histograms bring out modes, same with density plots
+    - for distribution information, CDFs are better than histograms because histograms throw out information!
+    - however spikes are hard to see in CDFs
+
+- pitfall: truncated data!
+    - this is a problem with session-forming especially! beginning before the trace and ending after the trace
+
+- pitfall: CDF scaling issues
+    - when all the action is crammed in the corner, especially the upper-left, this is a sign of a scaling issue
+    - when the log CDF looks like a gentle 'S' curve this is probably Gaussian
