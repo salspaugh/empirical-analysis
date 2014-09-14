@@ -1,0 +1,3 @@
+1. I had no difficulties with the networking portions of the paper.
+2. It took me 1 hour and 10 minutes to read the paper.
+3. This is really great to read in the context of what I have been working in. I recently wrote a workshop paper with recommendations of what to log from data analysis systems in order to better analyze and model user behavior. I wish I had read this paper before I wrote that. There are definitely many ideas I could have cited. TODO: Give examples. Add where there are other examples from my domain.

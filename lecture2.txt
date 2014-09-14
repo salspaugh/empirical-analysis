@@ -18,7 +18,7 @@
 - pitfall: timestamps: what can go wrong?
     - they're from the future
         - easy to check
-    - uknown timezones or timezone issues (more of a metadata issue)
+    - unknown timezones or timezone issues (more of a metadata issue)
     - clock drift: the clock may move over time due to bad synchronization
         - can maybe fix if you have multiple clocks
         - really broken
