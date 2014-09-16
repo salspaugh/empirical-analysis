@@ -1,3 +1,8 @@
 1. I had no difficulties with the networking portions of the paper.
 2. It took me 1 hour and 10 minutes to read the paper.
-3. This is really great to read in the context of what I have been working in. I recently wrote a workshop paper with recommendations of what to log from data analysis systems in order to better analyze and model user behavior. I wish I had read this paper before I wrote that. There are definitely many ideas I could have cited. TODO: Give examples. Add where there are other examples from my domain.
+3. This is really great to read in the context of what I have been working on. I recently wrote a workshop paper with recommendations of what to log from data analysis systems in order to better analyze and model user behavior (attached). I wish I had read this paper before I wrote that. (I no doubt should have cited it.) There are many connections. For a few examples:
+
+- "precision concerns what information is omitted and what information is kept" -- What is omitted is a big problem with the type of data I work on but I have termed it incomplete provenance.
+- The example about machine-generated versus human-initiated activity is very familiar to me in the domain I am working in (studying user interaction and modeling user behavior from system logs) and it's a big problem. One thing I've struggled with and didn't see much of in the paper is how to remove machine-generated events systematically.
+- The section on calibration, particularly on checking outliers and spikes, was useful as I haven't consistently checked that in my practice. You mention automating this in some way -- I'd be interested in more discussion on this as it seems like it would be hard in general as it depends on encoding so much domain-specific knowledge and human interpretation.
+- "Data reduction requests" are a good idea and something I haven't thought of yet but that I could perhaps do with my highly proprietary data. 
