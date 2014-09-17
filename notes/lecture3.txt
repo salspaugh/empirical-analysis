@@ -1,0 +1,25 @@
+reflections on last lecture:
+- the point is not just about clock errors but how do you systematically think about your measurements
+
+Q-Q plots
+- plot Nth percentile of statistical distribution versus Nth percentile for your empirical data for all possible N
+- this can reveal different modes where the fit is not exact
+
+"all models are wrong; some models are useful"
+
+Poisson process
+- essence is memory-less arrivals at rate lambda
+- great because it's mathematically tractable
+
+tricks for trying to match distributions
+- plot log X versus log of desired
+- plot 1 - X versus expected desired
+
+how to check for independence?
+- correlate X, Y = ro(X,Y) = E[(X-ux)(Y-uy)] / sigmax sigmay
+- this gives you a sense of how things are coupled
+- timeseries Ui : interarrival of ith user => check autocorrelation
+- autocorrelation = cor(Ui, Ui+k) especially k=1 (k is lag)
+- how do you know if the value resultant matters?
+    - generate stuff you know has no autocorrelation (e.g., shuffle interarrivals) and then compute the correlation of that
+    - can do this many times and kind of get a p-value that way
