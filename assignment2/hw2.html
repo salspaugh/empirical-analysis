@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!-- saved from url=(0043)http://www.icir.org/vern/cs294-105/hw2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Homework / CS 294-105 / Empirical Analysis / Fall 2014</title>
+</head>
+<body bgcolor="#ffffff">
+
+<h2>CS 294-105: Homework #2 - Due 5PM Mon Sep 15</h2>
+<hr>
+
+Complete this assignment by <b>by 5PM Monday Sep 15</b>.
+Turn in your answers via email to vern@cs.berkeley.edu
+with the term <b>Homework</b> in the Subject.
+
+<hr>
+
+<p>
+
+</p><ol type="A">
+
+<li>Read the paper <a href="http://www.icir.org/vern/papers/meas-strategies-imc04.pdf">Strategies for Sound Internet Measurement</a>.  While the paper
+is written in terms of Internet measurement in particular, nearly all of
+the principles it frames also apply to more general empirical analysis
+undertakings.  Some of Section 5 will not necessarily be relevant for you,
+but you may find its discussion of meta-data and longitudinal
+measurement useful.
+	<p>
+
+	</p><ol>
+	<li>If there were networking-related parts that you found
+		hampered your understanding of the points being
+		made, please sketch them.
+	<p>
+	</p></li><li>How long did it take you to read the paper?
+	<p>
+	</p></li><li>Do you have any questions or comments about the paper?
+	</li></ol>
+	<p>
+
+</p></li><li>If needed, (re)familiarize yourself with the workings of
+	<tt>traceroute</tt>, a tool very widely used to measure the
+	routes that individual messages ("packets") take through the Internet.
+	<br>
+	If you have questions about its operation (which may come up
+	later as you work on part C), feel free to post them to Piazza.
+	<p>
+	If you haven't used <tt>traceroute</tt> before, you might
+	find it useful to play with it.  It should be available on
+	any Unix system.
+
+</p></li><li>Download the <a href="http://www.icir.org/vern/cs294-105/data/routing-measurements.tgz">routing measurements</a> dataset.  Note that it expands to
+about 28K files totaling 110 MB.
+<p>
+
+	This dataset consists of <tt>traceroute</tt> measurements
+	repeatedly conducted between a set of Internet hosts.
+	The point of the measurements was to obtain a representative
+	view on the behavior of Internet routing, with one key
+	question (though not the only one) being to what degree
+	are routes <b>stable</b>, i.e., the route stays unchanged
+	for a lengthy period of time.
+	</p><p>
+	The measurement methodology included pairing the measurements:
+	that is, when conducting a measurement from A to B, at the same
+	time also conduct one from B to A.
+
+	</p><p>
+	Note, this is actual data from a large-scale measurement study,
+	presented in its entirety (other than I left out a number of
+	additional measurements that used somewhat differing methodologies).
+
+	</p><p>
+	A typical measurement looks something like:
+		</p><pre><code>traceroute to frog.rhic.bnl.gov (130.199.90.96), 30 hops max, 40 byte packets
+
+ 1  199.94.220.1  2.209 ms  1.927 ms  1.872 ms
+ 2  192.52.71.11  5.002 ms  2.333 ms  2.342 ms
+ 3  192.233.149.202  3.468 ms  4.128 ms  3.038 ms
+ 4  192.233.95.2  3.622 ms  4.832 ms  3.865 ms
+ 5  134.55.9.1  13.528 ms  13.458 ms  13.654 ms
+ 6  192.12.15.1  15.681 ms  17.251 ms  14.912 ms
+ 7  130.199.137.224  13.926 ms  14.453 ms  16.609 ms
+ 8  130.199.90.96  15.518 ms  14.52 ms  14.101 ms</code> </pre>
+		That is, a first line describing the measurement
+		being conducted, a blank line, and then a list
+		of each of the hops in the measured route,
+		with an Internet ("IP") address like <tt>199.94.220.1</tt>
+		followed by 3 time measurements corresponding to
+		the time it took to receive back the 3 probes sent
+		to that hop.  Each numbered hop represents one
+		step closer along the route towards the destination
+		(which appears in the final hop) and away from the
+		source.  (Note that the first hop is not the source
+		but a "router" to which the source has a direct
+		connection.)
+<p>
+
+	</p><ol>
+	<li>Summarize the most basic properties of the dataset.
+		(I'm again leaving this vague so you can reflect on
+		what you think constitutes those basic properties.)
+		Your answer here should be fairly brief.
+	<p>
+
+	</p></li><li>In what ways do some of the measurements differ from the "typical"
+		measurement mentioned above?  For each qualitatively
+		different way:
+		<p>
+		</p><ol type="A">
+		<li>Describe how to detect or otherwise recognize the differing
+			measurements.
+		<p>
+		</p></li><li>Quantify how often they appear in the dataset,
+			or explain why doing so would take quite a bit of work.
+		<p>
+		</p></li><li>Do you believe the difference represents an actual
+			phenomenon pertaining to the route being measured,
+			or instead a <em>measurement artifact</em>?
+			Explain why.
+		</li></ol>
+		<p>
+
+	</p></li><li>For the previous question, briefly sketch your approach
+		to finding such different measurements.  Does it leave
+		you confident that you likely found (nearly) all of
+		the different ways that the measurements manifest
+		as something other than the "typical" pattern?
+		<p>
+
+	</p></li><li><b>Optional</b> and <b>Hard</b>: if you're interested in
+		working with the data further, investigate what conclusions
+		you can draw from the measurements regarding the stability of
+		Internet routes.  Do they indeed remain unchanged for
+		significant periods of time?  Be sure to clearly describe
+		your methodology for conducting the analysis.
+		<p>
+
+	</p></li><li>How much time did you spend on this assignment?
+		<p>
+
+	</p></li><li>What additional data or meta-data did you find you wished
+		this dataset had included (if any)?
+		<p>
+
+	</p></li><li>(Optional:) Any comments on the assignment?  Was it
+		illuminating/frustrating/fun/boring?  What would
+		improve it?
+	</li></ol>
+
+
+</li></ol></body></html>
