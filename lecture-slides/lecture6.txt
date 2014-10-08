@@ -1,0 +1,17 @@
+
+shankari presentation notes
+- include data summary in presentation in terms of numbers of records, etc.
+- works very well to surprise the audience but shankari tipped hand by showing interleaving before showing backwards jumps and that shows data's craziness
+- label axes on graphs!
+- don't use weird hard-to-read colors
+- throw out "bad" data
+- figure out when to go back to the data provider and verify your findings about data issues
+- use simple tools for double-checking things
+- check for things that could violate the laws of physics
+- check for modes of behavior
+- how to check for time independent v homogenous poisson
+-- can check for non-homogeneity if you have a clear model for different modes e.g., weekday v weekend
+-- check arrival rate over various bucket sizes and see if it changes
+
+pablo presentation notes
+- anytime there is derivable data in the data set you should derive it to check to make sure everything agrees
