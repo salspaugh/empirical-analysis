@@ -1,0 +1,3 @@
+- interesting discussion about ways to efficiently sample from very large set of items 
+- how to handle very large data sets (JSON)
+

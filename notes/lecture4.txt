@@ -1,0 +1,2 @@
+"Nobody changes defaults." (RE: 30 hop max of traceroute)
+traceroute is meant for human consumption not machine consumption (it's a debugging tool not a analysis tool)

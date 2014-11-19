@@ -1,0 +1,2 @@
+- be careful about drawing distribution information from sampled data if you don't know how data was sampled
+

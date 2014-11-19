@@ -1,0 +1,104 @@
+- ask for access to intro slides
+- moving targets (didn't work):
+-- effectiveness of a network-based botnet takedown
+-- impact of a network-based botnet takedown (e.g., ad dollars lost)
+-- precise measurement of click fraud
+- moving targets (did worked)
+-- scale of ZA infections
+-- scale of ZA fraud
+-- number of dirty traffic resellers
+-- estimated global impact of ZA in terms of money
+
+- ZeroAccess (ZA) is giant botnet used to distribute other pieces of malware
+-- est. size: 1.9 million
+-- 4 known mechanisms of making money
+-- main one is click fraud
+
+- online ads: click anatomy
+-- amazon (advertiser) gives bing (ad network) ad to serve
+-- bing has relationship with other websites e.g. myblog (publisher) where ad is shown
+-- on page visit: page request gets page with JS, the JS goes to ad network where an impression is logged and returns ad
+-- if user clicks on add that goes to ad network where ad click is logged and redirect is returned, then client is redirected to advertiser
+-- if user clicks by then conversion request is sent by client to amazon and a conversion is logged
+-- things being logged: impressions, ad click, conversions
+-- accounting is difficult so the amount of fraud is huge
+-- ad network actually composed of more than just bing, but a complicated network of affiliates who act as middle men
+-- these middle men obscure relationship between main ad network and publisher
+
+- click fraud is delivering bogus traffic to advertiser pages: impressions, clicks, or conversions
+-- originally just done by publishers but now also done by middle men
+
+- timeline
+- july 2013: begin investigating ad fraud malware based on an inkling to look for interesting questions in this space
+-- everything is network analysis based if possible
+
+
+- ZA operation
+-- peer-to-peer command and control
+-- binary ships with list of other computers running ZA and it asks those for still others that are infected
+-- ZA peer will ask their list for malware files and the peers will send it to them
+-- measurement opportunity at the ZA peers
+
+- actual fraud:
+-- first payload: z00clicker: classic click fraud: high velocity, low quality clicks, separate simple C&C, add clicks not visible to user
+-- second payload: serpent (search engine result page hijacker): intercepts search queries, returns search results, intercepts click on results and returns ad website
+-- the ad website comes from the "ad server" <- actually again a collection of affiliates that have crazy redirection chains
+-- at the step where the search term is intercepted we can milk C&C commands from that step because it is also sent to serpent server
+-- C&C message is HTTP GET with simple obsfucation to obscure automated detection
+-- then used knowledge to send C&C requests to serpent servers, clicked on 100is of them to map out infrastructure (used user agent so clicks didn't count and no fraud was committed)
+-- from this you get a giant network of redirects
+* the plot is unreadable -- these have a purpose, they show that things are a big complex mess, good for presentations (not always worth it for papers)
+
+- timeline
+- oct 2013: get contacted by microsofts digital crime unit (DCU) -- mostly a PR branch to show microsoft is a good security citizen
+-- said they were going to try to take down ZA by taking down payload C&C servers (the modules) because there are a few IPs there
+-- new type of takedown: partner with ISPs and do network based blocking * how are takedowns usually done?
+-- takedowns are usually done with lawsuits? request is to publish a TR they can cite that say clearly who the parties are
+-- did this for goodwill
+
+- other C&C functionality: confirmations of ad clicks, legit SW updates
+- only 16 IPs used for C&C servers
+
+- when serpent intecepts page request from list of search engine, it had a bug that sent a DNS request to nonsense domain (that actually mangley encoded a real IP)
+-- they bought these domains and were able to figure out which /24 all these requests were coming from so they'd know every time when a ZA peer said hey someone clicked on an add
+-- this amounts to a telescope that instruments the entire network
+* when you can buy measurement like this you should!
+
+- new goal is to write paper about new type of botnet takedown
+-- ramp up to measure takedown via: reachability of C&C servers, clickfraud volume via DNS, 
+-- also do the TR
+
+- timeline
+- nov 2013: need to finish TR in two days
+-- MSR also seizes domains but agrees to direct all traffic from all seized domains to them
+-- also discover EDNS thing
+- dec 5 2013: had all measurement set up and everything went to zero at once
+-- this happened because they literally went to the data centers and pulled the machines off the network - old-fashioned takedown
+-- all the prep was useless
+
+- serpent
+-- each "domain name" means different signal like "I just did a search", "I served an ad", etc.
+-- has diurnal pattern, but after takedown day there is still some (much reduced) domain traffic
+
+- gets restraining order on dec 5 too, gets resolved 
+- dec 5 8pm new modules pushed to z00clicker but not to serpent
+
+- dec 5 6am new ZA payload: white flag
+- tapering effect is the time it takes to propagate modules through the network
+
+- timeline
+- dec-may 2014: analysis
+
+- started looking at interarrival patterns of requests in individual /24s
+-- in histograms, found huge unexpected spikes in interarrival times
+-- some of this due to bugs e.g., interacting with google on chrome causes additional DNS requests
+
+- make friends with large ad network
+
+- ad units are entities in an ad network -- a syndication that operates on particular traffic types
+- different ad units had different clicks per hour patterns
+
+* any time you have a bunch of vertical lines in a scatter plot check if they are harmonics (i.e, fractions) they result from small numbers being divided
+
+- hand classification of ad units to see if they are truly dirty
+
